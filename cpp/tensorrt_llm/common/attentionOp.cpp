@@ -971,7 +971,7 @@ int AttentionOp::getMaxNumSeqLenTile(int batch_beam_size) const
 }
 
 template <typename T>
-int AttentionOp::mlaGeneration(
+TRTLLM_API int AttentionOp::mlaGeneration(
     MlaParams<T>& params, EnqueueGenerationParams<T> const& generation_params, cudaStream_t stream)
 {
     TLLM_CHECK_WITH_INFO(params.seqQOffset != nullptr, "seqQOffset is nullptr.");
@@ -1321,7 +1321,7 @@ int AttentionOp::mlaGeneration(
 }
 
 #define MLA_FUNC_DEFINE(T)                                                                                             \
-    template int AttentionOp::mlaGeneration<T>(                                                                        \
+    template TRTLLM_API int AttentionOp::mlaGeneration<T>(                                                                        \
         MlaParams<T> & params, EnqueueGenerationParams<T> const& generation_params, cudaStream_t stream);
 
 MLA_FUNC_DEFINE(float)
@@ -1331,7 +1331,7 @@ MLA_FUNC_DEFINE(__nv_bfloat16)
 #endif
 
 template <typename T, typename KVCacheBuffer>
-int AttentionOp::enqueueContext(EnqueueContextParams<T> const& params, cudaStream_t stream)
+TRTLLM_API int AttentionOp::enqueueContext(EnqueueContextParams<T> const& params, cudaStream_t stream)
 {
     int const headSize = getHeadSize();
 
@@ -2179,30 +2179,30 @@ int AttentionOp::enqueueContext(EnqueueContextParams<T> const& params, cudaStrea
     return 0;
 }
 
-template int AttentionOp::enqueueContext<half, KVLinearBuffer>(
+template TRTLLM_API int AttentionOp::enqueueContext<half, KVLinearBuffer>(
     EnqueueContextParams<half> const& params, cudaStream_t stream);
 
-template int AttentionOp::enqueueContext<float, KVLinearBuffer>(
+template TRTLLM_API int AttentionOp::enqueueContext<float, KVLinearBuffer>(
     EnqueueContextParams<float> const& params, cudaStream_t stream);
 
 #ifdef ENABLE_BF16
-template int AttentionOp::enqueueContext<__nv_bfloat16, KVLinearBuffer>(
+template TRTLLM_API int AttentionOp::enqueueContext<__nv_bfloat16, KVLinearBuffer>(
     EnqueueContextParams<__nv_bfloat16> const& params, cudaStream_t stream);
 #endif
 
-template int AttentionOp::enqueueContext<half, KVBlockArray>(
+template TRTLLM_API int AttentionOp::enqueueContext<half, KVBlockArray>(
     EnqueueContextParams<half> const& params, cudaStream_t stream);
 
-template int AttentionOp::enqueueContext<float, KVBlockArray>(
+template TRTLLM_API int AttentionOp::enqueueContext<float, KVBlockArray>(
     EnqueueContextParams<float> const& params, cudaStream_t stream);
 
 #ifdef ENABLE_BF16
-template int AttentionOp::enqueueContext<__nv_bfloat16, KVBlockArray>(
+template TRTLLM_API int AttentionOp::enqueueContext<__nv_bfloat16, KVBlockArray>(
     EnqueueContextParams<__nv_bfloat16> const& params, cudaStream_t stream);
 #endif
 
 template <typename T, typename KVCacheBuffer>
-int AttentionOp::enqueueGeneration(EnqueueGenerationParams<T> const& params, cudaStream_t stream)
+TRTLLM_API int AttentionOp::enqueueGeneration(EnqueueGenerationParams<T> const& params, cudaStream_t stream)
 {
     int const headSize = getHeadSize();
     float const q_scaling = mQScaling;
@@ -2500,30 +2500,30 @@ int AttentionOp::enqueueGeneration(EnqueueGenerationParams<T> const& params, cud
     return 0;
 }
 
-template int AttentionOp::enqueueGeneration<half, KVLinearBuffer>(
+template TRTLLM_API int AttentionOp::enqueueGeneration<half, KVLinearBuffer>(
     EnqueueGenerationParams<half> const& params, cudaStream_t stream);
 
-template int AttentionOp::enqueueGeneration<float, KVLinearBuffer>(
+template TRTLLM_API int AttentionOp::enqueueGeneration<float, KVLinearBuffer>(
     EnqueueGenerationParams<float> const& params, cudaStream_t stream);
 
 #ifdef ENABLE_BF16
-template int AttentionOp::enqueueGeneration<__nv_bfloat16, KVLinearBuffer>(
+template TRTLLM_API int AttentionOp::enqueueGeneration<__nv_bfloat16, KVLinearBuffer>(
     EnqueueGenerationParams<__nv_bfloat16> const& params, cudaStream_t stream);
 #endif
 
-template int AttentionOp::enqueueGeneration<half, KVBlockArray>(
+template TRTLLM_API int AttentionOp::enqueueGeneration<half, KVBlockArray>(
     EnqueueGenerationParams<half> const& params, cudaStream_t stream);
 
-template int AttentionOp::enqueueGeneration<float, KVBlockArray>(
+template TRTLLM_API int AttentionOp::enqueueGeneration<float, KVBlockArray>(
     EnqueueGenerationParams<float> const& params, cudaStream_t stream);
 
 #ifdef ENABLE_BF16
-template int AttentionOp::enqueueGeneration<__nv_bfloat16, KVBlockArray>(
+template TRTLLM_API int AttentionOp::enqueueGeneration<__nv_bfloat16, KVBlockArray>(
     EnqueueGenerationParams<__nv_bfloat16> const& params, cudaStream_t stream);
 #endif
 
 template <typename T, typename KVCacheBuffer>
-void AttentionOp::prepareEnqueueGeneration(EnqueueGenerationParams<T> const& params)
+TRTLLM_API void AttentionOp::prepareEnqueueGeneration(EnqueueGenerationParams<T> const& params)
 {
     // self attn
     if (mXqaDispatcher.get() != nullptr)
@@ -2535,22 +2535,22 @@ void AttentionOp::prepareEnqueueGeneration(EnqueueGenerationParams<T> const& par
     }
 }
 
-template void AttentionOp::prepareEnqueueGeneration<half, KVLinearBuffer>(EnqueueGenerationParams<half> const& params);
+template TRTLLM_API void AttentionOp::prepareEnqueueGeneration<half, KVLinearBuffer>(EnqueueGenerationParams<half> const& params);
 
-template void AttentionOp::prepareEnqueueGeneration<float, KVLinearBuffer>(
+template TRTLLM_API void AttentionOp::prepareEnqueueGeneration<float, KVLinearBuffer>(
     EnqueueGenerationParams<float> const& params);
 
 #ifdef ENABLE_BF16
-template void AttentionOp::prepareEnqueueGeneration<__nv_bfloat16, KVLinearBuffer>(
+template TRTLLM_API void AttentionOp::prepareEnqueueGeneration<__nv_bfloat16, KVLinearBuffer>(
     EnqueueGenerationParams<__nv_bfloat16> const& params);
 #endif
 
-template void AttentionOp::prepareEnqueueGeneration<half, KVBlockArray>(EnqueueGenerationParams<half> const& params);
+template TRTLLM_API void AttentionOp::prepareEnqueueGeneration<half, KVBlockArray>(EnqueueGenerationParams<half> const& params);
 
-template void AttentionOp::prepareEnqueueGeneration<float, KVBlockArray>(EnqueueGenerationParams<float> const& params);
+template TRTLLM_API void AttentionOp::prepareEnqueueGeneration<float, KVBlockArray>(EnqueueGenerationParams<float> const& params);
 
 #ifdef ENABLE_BF16
-template void AttentionOp::prepareEnqueueGeneration<__nv_bfloat16, KVBlockArray>(
+template TRTLLM_API void AttentionOp::prepareEnqueueGeneration<__nv_bfloat16, KVBlockArray>(
     EnqueueGenerationParams<__nv_bfloat16> const& params);
 #endif
 

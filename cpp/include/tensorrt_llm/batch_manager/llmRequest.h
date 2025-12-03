@@ -1654,7 +1654,7 @@ public:
     ///     Decoder uses beamWidthIn=4, beamWidthOut=4 to get top 4 tokens
     ///     i.e. the same as normal Beam Search of `beamWidth==4`
     /// @param: forNextIteration: get beam width for next step rather than current beam width.
-    TRTLLM_API [[nodiscard]] SizeType32 getBeamWidthByIter(bool forNextIteration = false);
+    [[nodiscard]] TRTLLM_API SizeType32 getBeamWidthByIter(bool forNextIteration = false);
 
     [[nodiscard]] bool isFinished() const noexcept
     {

@@ -93,7 +93,7 @@ public:
     [[nodiscard]] static IBufferPtr pinnedPool(std::size_t size, nvinfer1::DataType type = kBYTE_TYPE);
 
     //! \brief Allocates a pinned `ITensor` of the given dimensions on the CPU in the default memory pool.
-    TRTLLM_API [[nodiscard]] static ITensorPtr pinnedPool(nvinfer1::Dims dims, nvinfer1::DataType type = kBYTE_TYPE);
+    [[nodiscard]] static ITensorPtr pinnedPool(nvinfer1::Dims dims, nvinfer1::DataType type = kBYTE_TYPE);
 
     //! \brief Allocates an `IBuffer` of the given size in UVM.
     [[nodiscard]] static IBufferPtr managed(std::size_t size, nvinfer1::DataType type = kBYTE_TYPE);
@@ -109,7 +109,7 @@ public:
         MemoryType memoryType, std::size_t size, nvinfer1::DataType type = kBYTE_TYPE) const;
 
     //! \brief Allocates an `ITensor` of the given dimensions and memory type.
-    TRTLLM_API [[nodiscard]] ITensorPtr allocate(
+    [[nodiscard]] ITensorPtr allocate(
         MemoryType memoryType, nvinfer1::Dims dims, nvinfer1::DataType type = kBYTE_TYPE) const;
 
     //! \brief Create an empty `IBuffer` of the given memory type. It may be resized later.
@@ -186,7 +186,7 @@ public:
     }
 
     //! \brief Get the underlying cuda stream.
-    TRTLLM_API [[nodiscard]] CudaStream const& getStream() const;
+    [[nodiscard]] TRTLLM_API CudaStream const& getStream() const;
 
     //! \brief The current size of the memory reserved by the memory pool.
     [[nodiscard]] std::size_t memoryPoolReserved() const;

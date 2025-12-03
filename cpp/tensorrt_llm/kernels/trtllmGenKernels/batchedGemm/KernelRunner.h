@@ -65,7 +65,7 @@ class TrtllmGenBatchedGemmRunner
 public:
     TRTLLM_API explicit TrtllmGenBatchedGemmRunner(TrtllmGenBatchedGemmRunnerOptions const& options);
 
-    TRTLLM_API [[nodiscard]] size_t getWorkspaceSizeInBytes(int32_t m, int32_t n, int32_t k,
+    [[nodiscard]] TRTLLM_API size_t getWorkspaceSizeInBytes(int32_t m, int32_t n, int32_t k,
         std::vector<int32_t> const& batchedTokens, int32_t numTokens, int32_t numBatches, int32_t maxNumCtasInBatchDim,
         int32_t configIndex) const;
 
@@ -105,13 +105,13 @@ public:
     [[nodiscard]] std::string getKernelNameFromConfigIndex(int32_t configIndex) const;
 
     // Get the list of config indices that are valid for the given problem shape
-    TRTLLM_API [[nodiscard]] std::vector<int64_t> getValidConfigIndices(int32_t m, int32_t n, int32_t k,
+    [[nodiscard]] TRTLLM_API std::vector<int64_t> getValidConfigIndices(int32_t m, int32_t n, int32_t k,
         std::vector<int32_t> const& batchedTokens, int32_t numTokens, int32_t numBatches, int32_t maxNumCtasInBatchDim,
         int32_t validM = -1, int32_t validN = -1, int32_t validK = -1) const;
 
     // Get a default config index that is valid for the given problem shape
     // This will be used as the fallback config if using auto-tuning
-    TRTLLM_API [[nodiscard]] int64_t getDefaultValidConfigIndex(int32_t m, int32_t n, int32_t k,
+    [[nodiscard]] TRTLLM_API int64_t getDefaultValidConfigIndex(int32_t m, int32_t n, int32_t k,
         std::vector<int32_t> const& batchedTokens, int32_t numTokens, int32_t numBatches, int32_t maxNumCtasInBatchDim,
         int32_t validM = -1, int32_t validN = -1, int32_t validK = -1) const;
 

@@ -206,7 +206,7 @@ public:
     int enqueueContext(EnqueueContextParams<T> const& params, cudaStream_t stream);
 
     template <typename T>
-    class EnqueueGenerationParams : public EnqueueParams<T>
+    class TRTLLM_API EnqueueGenerationParams : public EnqueueParams<T>
     {
     public:
         int32_t beam_width = 1;

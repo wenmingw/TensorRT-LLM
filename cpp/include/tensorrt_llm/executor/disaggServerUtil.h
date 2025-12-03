@@ -81,7 +81,7 @@ struct ResponseWithId
     ~ResponseWithId() = default;
 };
 
-class DisaggExecutorOrchestrator
+class TRTLLM_API DisaggExecutorOrchestrator
 {
 public:
     /// @brief Constructs a DisaggExecutorOrchestrator object.

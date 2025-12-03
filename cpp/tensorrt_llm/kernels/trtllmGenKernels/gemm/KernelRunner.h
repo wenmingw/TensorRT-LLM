@@ -42,7 +42,7 @@ class TrtllmGenGemmRunner
 public:
     TRTLLM_API explicit TrtllmGenGemmRunner(TrtllmGenGemmRunnerOptions const& options);
 
-    TRTLLM_API [[nodiscard]] size_t getWorkspaceSizeInBytes(int32_t m, int32_t n, int32_t k);
+    [[nodiscard]] TRTLLM_API size_t getWorkspaceSizeInBytes(int32_t m, int32_t n, int32_t k);
 
     TRTLLM_API void run(int32_t m, int32_t n, int32_t k, void const* a, float const* aScale, void const* b,
         float const* bScale, void* c, float* cScale, float* cScalePtr, void* workspace, CUstream stream, int device);

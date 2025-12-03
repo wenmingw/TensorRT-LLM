@@ -370,14 +370,14 @@ public:
     TRTLLM_API void run(
         MoERunnerArgs const& args, MoEWorkspace const& workspace, int device, cudaStream_t stream, int64_t configIndex);
 
-    TRTLLM_API [[nodiscard]] std::tuple<int32_t, int32_t> getWorkspaceSizeInBytes(
+    [[nodiscard]] TRTLLM_API std::tuple<int32_t, int32_t> getWorkspaceSizeInBytes(
         MoERunnerArgs const& args, int64_t configIndex) const;
 
-    TRTLLM_API [[nodiscard]] std::vector<int64_t> getValidConfigIndices(int32_t topK, int32_t hiddenSize,
+    [[nodiscard]] TRTLLM_API std::vector<int64_t> getValidConfigIndices(int32_t topK, int32_t hiddenSize,
         int32_t intermediateSize, int32_t numLocalExperts, int32_t numTokens, int32_t validHiddenSize = -1,
         int32_t validIntermediateSize = -1) const;
 
-    TRTLLM_API [[nodiscard]] int64_t getDefaultValidConfigIndex(int32_t topK, int32_t hiddenSize,
+    [[nodiscard]] TRTLLM_API int64_t getDefaultValidConfigIndex(int32_t topK, int32_t hiddenSize,
         int32_t intermediateSize, int32_t numLocalExperts, int32_t numTokens, int32_t validHiddenSize = -1,
         int32_t validIntermediateSize = -1) const;
 
